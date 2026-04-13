@@ -69,6 +69,6 @@ app.use((err, req, res, next) => {
 // Serve Vite frontend
 app.use(exp.static(path.join(__dirname, "blog/dist")));
 
-app.get("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "blog", "dist", "index.html"));
 });
