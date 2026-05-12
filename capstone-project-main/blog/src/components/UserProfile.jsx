@@ -29,7 +29,7 @@ function UserProfile() {
         setLoading(true);
 
         const res = await axios.get(
-          "http://localhost:5000/user-api/articles", // ✅ FIXED
+          "http://capstone-backend-tx3g.onrender.com/user-api/articles", // ✅ FIXED
           { withCredentials: true }
         );
 

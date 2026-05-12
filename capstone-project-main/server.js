@@ -21,7 +21,7 @@ const app = exp()
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://capstone-project-1zqu.onrender.com"
+    "https://blog-frontend-8kb6.onrender.com"
   ],
   credentials: true
 }));
