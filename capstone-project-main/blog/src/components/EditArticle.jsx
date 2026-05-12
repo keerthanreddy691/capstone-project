@@ -41,7 +41,7 @@ function EditArticle() {
       modifiedArticle.articleId = article._id;
 
       const res = await axios.put(
-        "http://capstone-backend-tx3g.onrender.com/author-api/article", // ✅ FIXED
+        "https://capstone-backend-tx3g.onrender.com/author-api/article", // ✅ FIXED
         modifiedArticle,
         { withCredentials: true }
       );

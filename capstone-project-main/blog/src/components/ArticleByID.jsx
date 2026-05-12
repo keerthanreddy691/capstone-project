@@ -67,7 +67,7 @@ function ArticleByID() {
 
     try {
       const res = await axios.patch(
-        "http://capstone-backend-tx3g.onrender.com/author-api/article", // ✅ FIXED
+        "https://capstone-backend-tx3g.onrender.com/author-api/article", // ✅ FIXED
         { articleId: article._id, isArticleActive: newStatus },
         { withCredentials: true }
       );
@@ -91,7 +91,7 @@ function ArticleByID() {
       commentObj.articleId = article._id;
 
       const res = await axios.put(
-        "http://capstone-backend-tx3g.onrender.com/user-api/articles/comment", // ✅ FIXED
+        "https://capstone-backend-tx3g.onrender.com/user-api/articles/comment", // ✅ FIXED
         commentObj,
         { withCredentials: true }
       );

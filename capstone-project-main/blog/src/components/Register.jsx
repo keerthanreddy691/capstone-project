@@ -44,7 +44,7 @@ function Register() {
       };
 
       const res = await axios.post(
-        "http://capstone-backend-tx3g.onrender.com/auth-api/users", // ✅ FIXED
+        "https://capstone-backend-tx3g.onrender.com/auth-api/users", // ✅ FIXED
         newUser,
         { withCredentials: true }
       );

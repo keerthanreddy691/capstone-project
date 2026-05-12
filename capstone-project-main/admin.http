@@ -10,29 +10,29 @@ Content-Type: application/json
 ###
 
 ### Get all users
-GET http://capstone-backend-tx3g.onrender.com/admin-api/users
+GET https://capstone-backend-tx3g.onrender.com/admin-api/users
 
 ###
 
 ###  Get all authors
-GET http://capstone-backend-tx3g.onrender.com/admin-api/authors
+GET https://capstone-backend-tx3g.onrender.com/admin-api/authors
 
 ###
 
 ### Block user
-PUT http://capstone-backend-tx3g.onrender.com/admin-api/user/block/69dcd419008c306291a55c5a
+PUT https://capstone-backend-tx3g.onrender.com/admin-api/user/block/69dcd419008c306291a55c5a
 
 ###
 
 ### Activate user
-PUT http://capstone-backend-tx3g.onrender.com/admin-api/user/activate/69dcd419008c306291a55c5a
+PUT https://capstone-backend-tx3g.onrender.com/admin-api/user/activate/69dcd419008c306291a55c5a
 
 ###
 
 ### Block author
-PUT http://capstone-backend-tx3g.onrender.com/admin-api/author/block/AUTHOR_ID
+PUT https://capstone-backend-tx3g.onrender.com/admin-api/author/block/AUTHOR_ID
 
 ###
 
 ### Activate author
-PUT http://capstone-backend-tx3g.onrender.com/admin-api/author/activate/AUTHOR_ID
+PUT https://capstone-backend-tx3g.onrender.com/admin-api/author/activate/AUTHOR_ID

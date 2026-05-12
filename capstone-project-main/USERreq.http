@@ -1,5 +1,5 @@
 ###register user
-POST http://capstone-backend-tx3g.onrender.com/auth-api/users
+POST https://capstone-backend-tx3g.onrender.com/auth-api/users
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 
 ###authentication
-POST http://capstone-backend-tx3g.onrender.com/auth-api/login
+POST https://capstone-backend-tx3g.onrender.com/auth-api/login
 Content-Type: application/json
 
 {
@@ -22,13 +22,13 @@ Content-Type: application/json
     "password":"abcd"
     }
 ###
-GET http://capstone-backend-tx3g.onrender.com/auth-api/logout
+GET https://capstone-backend-tx3g.onrender.com/auth-api/logout
 
 ### read articles of all authors
-GET http://capstone-backend-tx3g.onrender.com/user-api/article
+GET https://capstone-backend-tx3g.onrender.com/user-api/article
 
 ###add comment by user to an article
-PUT http://capstone-backend-tx3g.onrender.com/user-api/article
+PUT https://capstone-backend-tx3g.onrender.com/user-api/article
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ###change password
-PUT http://capstone-backend-tx3g.onrender.com/auth/password
+PUT https://capstone-backend-tx3g.onrender.com/auth/password
 Content-Type: application/json
 
 {
