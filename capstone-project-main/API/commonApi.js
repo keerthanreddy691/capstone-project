@@ -66,10 +66,10 @@ commonApp.post("/login", async (req, res) => {
     );
 
     res.cookie("token", signedToken, {
-      httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-    });
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+});
 
     res.status(200).json({
       message: "login success",
