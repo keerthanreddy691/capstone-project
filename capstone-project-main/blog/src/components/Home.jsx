@@ -10,7 +10,7 @@ function Home() {
 async function getArticles() {
   try {
     const res = await axios.get(
-      "https://YOUR-REAL-BACKEND.onrender.com/user-api/articles",
+      "https://capstone-backend-tx3g.onrender.com/user-api/articles",
       {
         withCredentials: true,
       }
@@ -25,7 +25,7 @@ async function getArticles() {
 async function handleStart() {
   try {
     await axios.get(
-      "https://YOUR-REAL-BACKEND.onrender.com/auth-api/check-auth",
+      "https://capstone-backend-tx3g.onrender.com/auth-api/check-auth",
       {
         withCredentials: true,
       }
