@@ -125,9 +125,9 @@ function Home() {
                     </span>
 
                     <span className="text-sm text-gray-400">
-                      {new Date(
-                        article.dateOfModification
-                      ).toLocaleDateString()}
+                      {article.createdAt
+  ? new Date(article.createdAt).toLocaleDateString()
+  : "No Date"}
                     </span>
                   </div>
                 </div>
