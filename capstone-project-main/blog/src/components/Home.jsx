@@ -5,44 +5,59 @@ import axios from "axios";
 
 function Home() {
   const [articles, setArticles] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
-async function getArticles() {
-  try {
-    const res = await axios.get(
-      "https://capstone-backend-tx3g.onrender.com/user-api/articles",
-      {
-        withCredentials: true,
-      }
-    );
 
-    setArticles(res.data.payload || []);
-  } catch (err) {
-    console.log(err);
+  // GET ARTICLES
+  async function getArticles() {
+    try {
+      const res = await axios.get(
+        "https://capstone-backend-tx3g.onrender.com/user-api/articles",
+        {
+          withCredentials: true,
+        }
+      );
+
+      setArticles(res.data.payload || []);
+    } catch (err) {
+      console.log(err);
+    }
   }
-}
 
-async function handleStart() {
-  try {
-    await axios.get(
-      "https://capstone-backend-tx3g.onrender.com/auth-api/check-auth",
-      {
-        withCredentials: true,
-      }
-    );
+  // CHECK AUTH
+  async function checkAuth() {
+    try {
+      await axios.get(
+        "https://capstone-backend-tx3g.onrender.com/auth-api/check-auth",
+        {
+          withCredentials: true,
+        }
+      );
 
-    navigate("/articles");
-  } catch (err) {
-    navigate("/login");
+      setIsLoggedIn(true);
+    } catch (err) {
+      setIsLoggedIn(false);
+    }
   }
-}
+
+  // HANDLE BUTTON CLICK
+  async function handleStart() {
+    if (isLoggedIn) {
+      navigate("/articles");
+    } else {
+      navigate("/login");
+    }
+  }
 
   useEffect(() => {
     getArticles();
+    checkAuth();
   }, []);
 
   return (
-    <div className="bg-[#0f172a] min-h-screen text-white">
+    <div className="bg-[#0f172a] min-h-screen text-white flex flex-col justify-between">
+      
       {/* HERO SECTION */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 blur-3xl"></div>
@@ -58,17 +73,19 @@ async function handleStart() {
             Explore modern blogs and developer articles from creators around the world.
           </p>
 
-          <button
-            onClick={handleStart}
-            className="mt-10 bg-cyan-400 text-black px-8 py-4 rounded-2xl font-bold hover:scale-105 transition"
-          >
-            Get Started
-          </button>
+          {!isLoggedIn && (
+            <button
+              onClick={handleStart}
+              className="mt-10 bg-cyan-400 text-black px-8 py-4 rounded-2xl font-bold hover:scale-105 transition"
+            >
+              Get Started
+            </button>
+          )}
         </div>
       </section>
 
-      {/* LATEST ARTICLES */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
+      {/* ARTICLES SECTION */}
+      <section className="max-w-7xl mx-auto px-6 pb-20 w-full">
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-3xl font-bold">Latest Articles</h2>
 
@@ -124,7 +141,7 @@ async function handleStart() {
       </section>
 
       {/* FOOTER */}
-      
+      <Footer />
     </div>
   );
 }
