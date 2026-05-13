@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import axios from "axios";
 
 function Home() {
   const [articles, setArticles] = useState([]);
 
   const navigate = useNavigate();
-
-  async function getArticles() {
-    try {
-      const res = await fetch(
-        "https://your-backend-url.onrender.com/user-api/articles"
-      );
-
-      const data = await res.json();
-
-      setArticles(data.payload || []);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function handleStart() {
-    try {
-      const res = await fetch(
-        "https://your-backend-url.onrender.com/auth-api/check-auth",
-        {
-          credentials: "include",
-        }
-      );
-
-      if (res.ok) {
-        navigate("/articles");
-      } else {
-        navigate("/login");
+async function getArticles() {
+  try {
+    const res = await axios.get(
+      "https://YOUR-REAL-BACKEND.onrender.com/user-api/articles",
+      {
+        withCredentials: true,
       }
-    } catch (err) {
-      navigate("/login");
-    }
+    );
+
+    setArticles(res.data.payload || []);
+  } catch (err) {
+    console.log(err);
   }
+}
+
+async function handleStart() {
+  try {
+    await axios.get(
+      "https://YOUR-REAL-BACKEND.onrender.com/auth-api/check-auth",
+      {
+        withCredentials: true,
+      }
+    );
+
+    navigate("/articles");
+  } catch (err) {
+    navigate("/login");
+  }
+}
 
   useEffect(() => {
     getArticles();
