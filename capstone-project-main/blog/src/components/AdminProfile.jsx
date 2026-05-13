@@ -13,6 +13,8 @@ function AdminProfile() {
         { withCredentials: true }
       );
 
+      console.log("Users:", res.data);
+
       setUsers(res.data.payload || []);
     } catch (err) {
       console.log(err);
@@ -27,6 +29,8 @@ function AdminProfile() {
         { withCredentials: true }
       );
 
+      console.log("Authors:", res.data);
+
       setAuthors(res.data.payload || []);
     } catch (err) {
       console.log(err);
@@ -36,11 +40,15 @@ function AdminProfile() {
   // BLOCK USER
   const blockUser = async (id) => {
     try {
-      await axios.put(
+      const res = await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/block/${id}`,
         {},
         { withCredentials: true }
       );
+
+      console.log(res.data);
+
+      alert("User Blocked");
 
       getUsers();
     } catch (err) {
@@ -51,11 +59,15 @@ function AdminProfile() {
   // ACTIVATE USER
   const activateUser = async (id) => {
     try {
-      await axios.put(
+      const res = await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/activate/${id}`,
         {},
         { withCredentials: true }
       );
+
+      console.log(res.data);
+
+      alert("User Activated");
 
       getUsers();
     } catch (err) {
@@ -66,11 +78,15 @@ function AdminProfile() {
   // BLOCK AUTHOR
   const blockAuthor = async (id) => {
     try {
-      await axios.put(
+      const res = await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/block/${id}`,
         {},
         { withCredentials: true }
       );
+
+      console.log(res.data);
+
+      alert("Author Blocked");
 
       getAuthors();
     } catch (err) {
@@ -81,11 +97,15 @@ function AdminProfile() {
   // ACTIVATE AUTHOR
   const activateAuthor = async (id) => {
     try {
-      await axios.put(
+      const res = await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/activate/${id}`,
         {},
         { withCredentials: true }
       );
+
+      console.log(res.data);
+
+      alert("Author Activated");
 
       getAuthors();
     } catch (err) {
@@ -105,7 +125,7 @@ function AdminProfile() {
         Admin Dashboard
       </h1>
 
-      {/* USERS SECTION */}
+      {/* USERS */}
       <div className="mb-16">
         <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Users
@@ -123,6 +143,16 @@ function AdminProfile() {
                 <div>
                   <p className="text-lg font-medium text-white">
                     {u.email}
+                  </p>
+
+                  <p
+                    className={`text-sm mt-1 ${
+                      u.isUserActive
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    {u.isUserActive ? "Active" : "Blocked"}
                   </p>
                 </div>
 
@@ -147,7 +177,7 @@ function AdminProfile() {
         )}
       </div>
 
-      {/* AUTHORS SECTION */}
+      {/* AUTHORS */}
       <div>
         <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Authors
@@ -165,6 +195,16 @@ function AdminProfile() {
                 <div>
                   <p className="text-lg font-medium text-white">
                     {a.email}
+                  </p>
+
+                  <p
+                    className={`text-sm mt-1 ${
+                      a.isUserActive
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    {a.isUserActive ? "Active" : "Blocked"}
                   </p>
                 </div>
 
