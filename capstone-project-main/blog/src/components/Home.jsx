@@ -101,7 +101,7 @@ function Home() {
             {articles.slice(0, 6).map((article) => (
               <div
                 key={article._id}
-                onClick={() => navigate(`/article/${article.articleId}`)}
+                onClick={() => navigate(`/article/${article._id}`)}
                 className="cursor-pointer bg-white/10 backdrop-blur-lg border border-white/10 rounded-3xl overflow-hidden hover:scale-[1.02] transition duration-300"
               >
                 <img
