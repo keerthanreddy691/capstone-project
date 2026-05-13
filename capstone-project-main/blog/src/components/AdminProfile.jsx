@@ -5,15 +5,15 @@ function AdminProfile() {
   const [users, setUsers] = useState([]);
   const [authors, setAuthors] = useState([]);
 
-  // GET USERS
+  // ================= GET USERS =================
   const getUsers = async () => {
     try {
       const res = await axios.get(
         "https://capstone-backend-tx3g.onrender.com/admin-api/users",
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
-
-      console.log("Users:", res.data);
 
       setUsers(res.data.payload || []);
     } catch (err) {
@@ -21,15 +21,15 @@ function AdminProfile() {
     }
   };
 
-  // GET AUTHORS
+  // ================= GET AUTHORS =================
   const getAuthors = async () => {
     try {
       const res = await axios.get(
         "https://capstone-backend-tx3g.onrender.com/admin-api/authors",
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
-
-      console.log("Authors:", res.data);
 
       setAuthors(res.data.payload || []);
     } catch (err) {
@@ -37,77 +37,73 @@ function AdminProfile() {
     }
   };
 
-  // BLOCK USER
+  // ================= BLOCK USER =================
   const blockUser = async (id) => {
     try {
-      const res = await axios.put(
+      await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/block/${id}`,
         {},
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
 
-      console.log(res.data);
-
-      alert("User Blocked");
-
       getUsers();
+
     } catch (err) {
       console.log(err);
     }
   };
 
-  // ACTIVATE USER
+  // ================= ACTIVATE USER =================
   const activateUser = async (id) => {
     try {
-      const res = await axios.put(
+      await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/activate/${id}`,
         {},
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
-
-      console.log(res.data);
-
-      alert("User Activated");
 
       getUsers();
+
     } catch (err) {
       console.log(err);
     }
   };
 
-  // BLOCK AUTHOR
+  // ================= BLOCK AUTHOR =================
   const blockAuthor = async (id) => {
     try {
-      const res = await axios.put(
+      await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/block/${id}`,
         {},
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
 
-      console.log(res.data);
-
-      alert("Author Blocked");
-
       getAuthors();
+
     } catch (err) {
       console.log(err);
     }
   };
 
-  // ACTIVATE AUTHOR
+  // ================= ACTIVATE AUTHOR =================
   const activateAuthor = async (id) => {
     try {
-      const res = await axios.put(
+      await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/activate/${id}`,
         {},
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
 
-      console.log(res.data);
-
-      alert("Author Activated");
-
       getAuthors();
+
     } catch (err) {
       console.log(err);
     }
@@ -120,28 +116,40 @@ function AdminProfile() {
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-white px-6 py-10">
-      
-      <h1 className="text-5xl font-black text-center mb-14">
-        Admin Dashboard
-      </h1>
 
-      {/* USERS */}
+      {/* HEADER */}
+      <div className="mb-14 text-center">
+        <h1 className="text-5xl font-black">
+          Admin Dashboard
+        </h1>
+
+        <p className="text-gray-400 mt-3">
+          Manage Users and Authors
+        </p>
+      </div>
+
+      {/* USERS SECTION */}
       <div className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
+
+        <h2 className="text-3xl font-bold text-cyan-400 mb-8">
           Users
         </h2>
 
         {users.length === 0 ? (
-          <p className="text-gray-400">No users found</p>
+          <p className="text-gray-400">
+            No users found
+          </p>
         ) : (
           <div className="grid gap-5">
+
             {users.map((u) => (
               <div
                 key={u._id}
                 className="bg-[#1e293b] border border-white/10 rounded-2xl p-5 flex items-center justify-between"
               >
+
                 <div>
-                  <p className="text-lg font-medium text-white">
+                  <p className="text-lg font-semibold">
                     {u.email}
                   </p>
 
@@ -152,11 +160,14 @@ function AdminProfile() {
                         : "text-red-400"
                     }`}
                   >
-                    {u.isUserActive ? "Active" : "Blocked"}
+                    {u.isUserActive
+                      ? "Active"
+                      : "Blocked"}
                   </p>
                 </div>
 
                 <div className="flex gap-3">
+
                   <button
                     onClick={() => blockUser(u._id)}
                     className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
@@ -170,30 +181,37 @@ function AdminProfile() {
                   >
                     Activate
                   </button>
+
                 </div>
               </div>
             ))}
+
           </div>
         )}
       </div>
 
-      {/* AUTHORS */}
+      {/* AUTHORS SECTION */}
       <div>
-        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
+
+        <h2 className="text-3xl font-bold text-cyan-400 mb-8">
           Authors
         </h2>
 
         {authors.length === 0 ? (
-          <p className="text-gray-400">No authors found</p>
+          <p className="text-gray-400">
+            No authors found
+          </p>
         ) : (
           <div className="grid gap-5">
+
             {authors.map((a) => (
               <div
                 key={a._id}
                 className="bg-[#1e293b] border border-white/10 rounded-2xl p-5 flex items-center justify-between"
               >
+
                 <div>
-                  <p className="text-lg font-medium text-white">
+                  <p className="text-lg font-semibold">
                     {a.email}
                   </p>
 
@@ -204,11 +222,14 @@ function AdminProfile() {
                         : "text-red-400"
                     }`}
                   >
-                    {a.isUserActive ? "Active" : "Blocked"}
+                    {a.isUserActive
+                      ? "Active"
+                      : "Blocked"}
                   </p>
                 </div>
 
                 <div className="flex gap-3">
+
                   <button
                     onClick={() => blockAuthor(a._id)}
                     className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
@@ -222,12 +243,15 @@ function AdminProfile() {
                   >
                     Activate
                   </button>
+
                 </div>
               </div>
             ))}
+
           </div>
         )}
       </div>
+
     </div>
   );
 }
