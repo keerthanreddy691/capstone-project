@@ -16,6 +16,7 @@ function AdminProfile() {
       );
 
       setUsers(res.data.payload || []);
+
     } catch (err) {
       console.log(err);
     }
@@ -32,6 +33,7 @@ function AdminProfile() {
       );
 
       setAuthors(res.data.payload || []);
+
     } catch (err) {
       console.log(err);
     }
@@ -40,6 +42,7 @@ function AdminProfile() {
   // ================= BLOCK USER =================
   const blockUser = async (id) => {
     try {
+
       await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/block/${id}`,
         {},
@@ -58,6 +61,7 @@ function AdminProfile() {
   // ================= ACTIVATE USER =================
   const activateUser = async (id) => {
     try {
+
       await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/user/activate/${id}`,
         {},
@@ -76,6 +80,7 @@ function AdminProfile() {
   // ================= BLOCK AUTHOR =================
   const blockAuthor = async (id) => {
     try {
+
       await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/block/${id}`,
         {},
@@ -94,6 +99,7 @@ function AdminProfile() {
   // ================= ACTIVATE AUTHOR =================
   const activateAuthor = async (id) => {
     try {
+
       await axios.put(
         `https://capstone-backend-tx3g.onrender.com/admin-api/author/activate/${id}`,
         {},
@@ -109,6 +115,7 @@ function AdminProfile() {
     }
   };
 
+  // ================= INITIAL LOAD =================
   useEffect(() => {
     getUsers();
     getAuthors();
@@ -118,7 +125,7 @@ function AdminProfile() {
     <div className="min-h-screen bg-[#0f172a] text-white px-6 py-10">
 
       {/* HEADER */}
-      <div className="mb-14 text-center">
+      <div className="text-center mb-14">
         <h1 className="text-5xl font-black">
           Admin Dashboard
         </h1>
@@ -128,7 +135,7 @@ function AdminProfile() {
         </p>
       </div>
 
-      {/* USERS SECTION */}
+      {/* ================= USERS ================= */}
       <div className="mb-16">
 
         <h2 className="text-3xl font-bold text-cyan-400 mb-8">
@@ -154,7 +161,7 @@ function AdminProfile() {
                   </p>
 
                   <p
-                    className={`text-sm mt-1 ${
+                    className={`text-sm mt-1 font-medium ${
                       u.isUserActive
                         ? "text-green-400"
                         : "text-red-400"
@@ -168,19 +175,21 @@ function AdminProfile() {
 
                 <div className="flex gap-3">
 
-                  <button
-                    onClick={() => blockUser(u._id)}
-                    className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
-                  >
-                    Block
-                  </button>
-
-                  <button
-                    onClick={() => activateUser(u._id)}
-                    className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
-                  >
-                    Activate
-                  </button>
+                  {u.isUserActive ? (
+                    <button
+                      onClick={() => blockUser(u._id)}
+                      className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
+                    >
+                      Block
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => activateUser(u._id)}
+                      className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
+                    >
+                      Activate
+                    </button>
+                  )}
 
                 </div>
               </div>
@@ -190,7 +199,7 @@ function AdminProfile() {
         )}
       </div>
 
-      {/* AUTHORS SECTION */}
+      {/* ================= AUTHORS ================= */}
       <div>
 
         <h2 className="text-3xl font-bold text-cyan-400 mb-8">
@@ -216,7 +225,7 @@ function AdminProfile() {
                   </p>
 
                   <p
-                    className={`text-sm mt-1 ${
+                    className={`text-sm mt-1 font-medium ${
                       a.isUserActive
                         ? "text-green-400"
                         : "text-red-400"
@@ -230,19 +239,21 @@ function AdminProfile() {
 
                 <div className="flex gap-3">
 
-                  <button
-                    onClick={() => blockAuthor(a._id)}
-                    className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
-                  >
-                    Block
-                  </button>
-
-                  <button
-                    onClick={() => activateAuthor(a._id)}
-                    className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
-                  >
-                    Activate
-                  </button>
+                  {a.isUserActive ? (
+                    <button
+                      onClick={() => blockAuthor(a._id)}
+                      className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
+                    >
+                      Block
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => activateAuthor(a._id)}
+                      className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
+                    >
+                      Activate
+                    </button>
+                  )}
 
                 </div>
               </div>
