@@ -5,7 +5,7 @@ import { articleModel } from "../Models/articleModel.js"
 export const userApp = exp.Router()
 
 // Read all active articles
-userApp.get("/articles", verifyToken("USER"), async (req, res) => {
+userApp.get("/articles", async (req, res) => {
   try {
     const articleList = await articleModel.find({ isArticleActive: true })
     res.status(200).json({ message: "articles", payload: articleList })
