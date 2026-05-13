@@ -108,14 +108,7 @@ function Home() {
   }
   className="cursor-pointer bg-white/10 backdrop-blur-lg border border-white/10 rounded-3xl overflow-hidden hover:scale-[1.02] transition duration-300"
 >
-                <img
-                  src={
-                    article.image ||
-                    "https://images.unsplash.com/photo-1499750310107-5fef28a66643"
-                  }
-                  alt=""
-                  className="w-full h-56 object-cover"
-                />
+               
 
                 <div className="p-6">
                   <h3 className="text-2xl font-semibold mb-3">
