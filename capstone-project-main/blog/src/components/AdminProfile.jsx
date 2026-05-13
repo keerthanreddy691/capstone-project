@@ -99,78 +99,94 @@ function AdminProfile() {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 text-white">
+    <div className="min-h-screen bg-[#0f172a] text-white px-6 py-10">
       
-      <h1 className="text-4xl font-bold mb-10 text-center">
+      <h1 className="text-5xl font-black text-center mb-14">
         Admin Dashboard
       </h1>
 
-      {/* USERS */}
-      <div className="mb-14">
-        <h2 className="text-2xl font-semibold mb-6">
+      {/* USERS SECTION */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Users
         </h2>
 
-        <div className="grid gap-4">
-          {users.map((u) => (
-            <div
-              key={u._id}
-              className="bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between"
-            >
-              <p>{u.email}</p>
+        {users.length === 0 ? (
+          <p className="text-gray-400">No users found</p>
+        ) : (
+          <div className="grid gap-5">
+            {users.map((u) => (
+              <div
+                key={u._id}
+                className="bg-[#1e293b] border border-white/10 rounded-2xl p-5 flex items-center justify-between"
+              >
+                <div>
+                  <p className="text-lg font-medium text-white">
+                    {u.email}
+                  </p>
+                </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => blockUser(u._id)}
-                  className="bg-red-500 px-4 py-2 rounded-lg"
-                >
-                  Block
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => blockUser(u._id)}
+                    className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
+                  >
+                    Block
+                  </button>
 
-                <button
-                  onClick={() => activateUser(u._id)}
-                  className="bg-green-500 px-4 py-2 rounded-lg"
-                >
-                  Activate
-                </button>
+                  <button
+                    onClick={() => activateUser(u._id)}
+                    className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
+                  >
+                    Activate
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* AUTHORS */}
+      {/* AUTHORS SECTION */}
       <div>
-        <h2 className="text-2xl font-semibold mb-6">
+        <h2 className="text-3xl font-bold mb-8 text-cyan-400">
           Authors
         </h2>
 
-        <div className="grid gap-4">
-          {authors.map((a) => (
-            <div
-              key={a._id}
-              className="bg-white/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between"
-            >
-              <p>{a.email}</p>
+        {authors.length === 0 ? (
+          <p className="text-gray-400">No authors found</p>
+        ) : (
+          <div className="grid gap-5">
+            {authors.map((a) => (
+              <div
+                key={a._id}
+                className="bg-[#1e293b] border border-white/10 rounded-2xl p-5 flex items-center justify-between"
+              >
+                <div>
+                  <p className="text-lg font-medium text-white">
+                    {a.email}
+                  </p>
+                </div>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => blockAuthor(a._id)}
-                  className="bg-red-500 px-4 py-2 rounded-lg"
-                >
-                  Block
-                </button>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => blockAuthor(a._id)}
+                    className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-xl font-semibold transition"
+                  >
+                    Block
+                  </button>
 
-                <button
-                  onClick={() => activateAuthor(a._id)}
-                  className="bg-green-500 px-4 py-2 rounded-lg"
-                >
-                  Activate
-                </button>
+                  <button
+                    onClick={() => activateAuthor(a._id)}
+                    className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold transition"
+                  >
+                    Activate
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
