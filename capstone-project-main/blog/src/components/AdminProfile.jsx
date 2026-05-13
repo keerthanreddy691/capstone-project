@@ -1,13 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/authStore";
 
 function AdminProfile() {
+
   const [users, setUsers] = useState([]);
   const [authors, setAuthors] = useState([]);
+
+  const navigate = useNavigate();
+
+  const logout = useAuth((state) => state.logout);
+
+  // ================= LOGOUT =================
+  const onLogout = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   // ================= GET USERS =================
   const getUsers = async () => {
     try {
+
       const res = await axios.get(
         "https://capstone-backend-tx3g.onrender.com/admin-api/users",
         {
@@ -25,6 +39,7 @@ function AdminProfile() {
   // ================= GET AUTHORS =================
   const getAuthors = async () => {
     try {
+
       const res = await axios.get(
         "https://capstone-backend-tx3g.onrender.com/admin-api/authors",
         {
@@ -125,14 +140,25 @@ function AdminProfile() {
     <div className="min-h-screen bg-[#0f172a] text-white px-6 py-10">
 
       {/* HEADER */}
-      <div className="text-center mb-14">
-        <h1 className="text-5xl font-black">
-          Admin Dashboard
-        </h1>
+      <div className="flex items-center justify-between mb-14">
 
-        <p className="text-gray-400 mt-3">
-          Manage Users and Authors
-        </p>
+        <div>
+          <h1 className="text-5xl font-black">
+            Admin Dashboard
+          </h1>
+
+          <p className="text-gray-400 mt-3">
+            Manage Users and Authors
+          </p>
+        </div>
+
+        <button
+          onClick={onLogout}
+          className="bg-red-500 hover:bg-red-600 px-6 py-3 rounded-xl font-semibold transition"
+        >
+          Logout
+        </button>
+
       </div>
 
       {/* ================= USERS ================= */}
