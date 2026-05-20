@@ -65,10 +65,12 @@ commonApp.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.cookie("token", signedToken, {
+   res.cookie("token", signedToken, {
   httpOnly: true,
   secure: true,
   sameSite: "None",
+  path: "/",
+  maxAge: 60 * 60 * 1000, // 1 hour
 });
 
     res.status(200).json({
@@ -88,11 +90,14 @@ commonApp.post("/login", async (req, res) => {
 commonApp.get("/logout", async (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: true,
+    sameSite: "None",
+    path: "/",
   });
 
-  res.status(200).json({ message: "logout success" });
+  res.status(200).json({
+    message: "logout success",
+  });
 });
 
 
