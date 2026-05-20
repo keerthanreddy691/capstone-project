@@ -104,16 +104,42 @@ commonApp.get("/logout", async (req, res) => {
 // ================= CHECK AUTH =================
 commonApp.get(
   "/check-auth",
-  verifyToken("USER", "AUTHOR", "ADMIN"), // ✅ allow all roles
+  verifyToken("USER", "AUTHOR", "ADMIN"),
   async (req, res) => {
     try {
+      let user;
+
+      if (req.user.role === "USER") {
+        user = await userModel
+          .findById(req.user.id)
+          .select("-password");
+      }
+
+      if (req.user.role === "AUTHOR") {
+        user = await authorModel
+          .findById(req.user.id)
+          .select("-password");
+      }
+
+      if (req.user.role === "ADMIN") {
+        user = await adminModel
+          .findById(req.user.id)
+          .select("-password");
+      }
+
+      if (!user) {
+        return res.status(401).json({
+          message: "User not found",
+        });
+      }
+
       res.status(200).json({
         message: "User authenticated",
-        payload: req.user,
+        payload: user,
       });
     } catch (err) {
       res.status(500).json({
-        message: "error occured",
+        message: "error occurred",
         error: err.message,
       });
     }
