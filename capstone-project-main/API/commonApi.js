@@ -182,7 +182,7 @@ commonApp.get(
         error: err.message,
       });
     }
-  }
+  
 );
   }
 );
