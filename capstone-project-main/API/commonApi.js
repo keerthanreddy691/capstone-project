@@ -149,6 +149,7 @@ commonApp.get(
 
 // ================= CHANGE PASSWORD =================
 // ================= CHECK AUTH =================
+// ================= CHECK AUTH =================
 commonApp.get(
   "/check-auth",
   verifyToken("USER", "AUTHOR", "ADMIN"),
@@ -182,7 +183,5 @@ commonApp.get(
         error: err.message,
       });
     }
-  
-);
   }
 );
