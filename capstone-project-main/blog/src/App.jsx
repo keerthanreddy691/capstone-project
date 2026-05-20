@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom"; // ✅ FIXED
+import { useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+import { useAuth } from "./store/authStore";
 
 import RootLayout from "./components/RootLayout";
 import Home from "./components/Home";
@@ -10,12 +14,17 @@ import AuthorArticles from "./components/AuthorArticles";
 import EditArticle from "./components/EditArticle";
 import WriteArticles from "./components/WriteArticles";
 import ArticleByID from "./components/ArticleByID";
-import { Toaster } from "react-hot-toast";
 import Unauthorized from "./components/Unauthorized";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProfile from "./components/AdminProfile";
 
 function App() {
+  const checkAuth = useAuth((state) => state.checkAuth);
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
   const routerObj = createBrowserRouter([
     {
       path: "/",
@@ -27,7 +36,7 @@ function App() {
 
         { path: "login", element: <Login /> },
 
-        //  USER ROUTE
+        // USER ROUTE
         {
           path: "user-profile",
           element: (
@@ -37,7 +46,7 @@ function App() {
           ),
         },
 
-        //  AUTHOR ROUTES
+        // AUTHOR ROUTES
         {
           path: "author-profile",
           element: (
@@ -51,17 +60,18 @@ function App() {
             { path: "write-article", element: <WriteArticles /> },
           ],
         },
-        // ADMIN ROUTE
-{
-  path: "admin-profile",
-  element: (
-    <ProtectedRoute allowedRoles={["ADMIN"]}>
-      <AdminProfile />
-    </ProtectedRoute>
-  ),
-},
 
-        //  PROTECTED ARTICLE VIEW (USER + AUTHOR)
+        // ADMIN ROUTE
+        {
+          path: "admin-profile",
+          element: (
+            <ProtectedRoute allowedRoles={["ADMIN"]}>
+              <AdminProfile />
+            </ProtectedRoute>
+          ),
+        },
+
+        // ARTICLE VIEW
         {
           path: "article/:id",
           element: (
@@ -71,7 +81,7 @@ function App() {
           ),
         },
 
-        //  PROTECTED EDIT
+        // EDIT ARTICLE
         {
           path: "edit-article",
           element: (
@@ -87,10 +97,10 @@ function App() {
   ]);
 
   return (
-    <div>
+    <>
       <Toaster position="top-center" />
       <RouterProvider router={routerObj} />
-    </div>
+    </>
   );
 }
 
