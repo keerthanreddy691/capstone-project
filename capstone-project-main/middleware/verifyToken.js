@@ -25,6 +25,17 @@ export const verifyToken = (...allowedRoles) => {
       );
 
       console.log("Decoded Token:", decodedToken);
+      console.log("Cookies:", req.cookies);
+
+const token = req.cookies?.token;
+console.log("Token:", token);
+
+const decodedToken = jwt.verify(
+  token,
+  process.env.SECRET_KEY
+);
+
+console.log("Decoded Token:", decodedToken);
 
       // Check role authorization
       if (!allowedRoles.includes(decodedToken.role)) {
@@ -38,11 +49,12 @@ export const verifyToken = (...allowedRoles) => {
 
       next();
     } catch (err) {
-      console.log("JWT ERROR:", err.message);
+  console.log("JWT ERROR:", err.name);
+  console.log("JWT ERROR MESSAGE:", err.message);
 
-      return res.status(401).json({
-        message: "invalid token",
-      });
-    }
+  return res.status(401).json({
+    message: "invalid token",
+  });
+}
   };
 };
