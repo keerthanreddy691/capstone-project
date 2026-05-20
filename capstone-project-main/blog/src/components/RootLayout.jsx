@@ -19,7 +19,7 @@ function RootLayout() {
         <Outlet />
       </div>
 
-      <Footer />
+      
     </div>
   );
 }
