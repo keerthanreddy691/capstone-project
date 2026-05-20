@@ -1,25 +1,28 @@
 import { useAuth } from "../store/authStore";
-import { Navigate } from "react-router";
+import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children, allowedRoles }) {
   const { loading, currentUser, isAuthenticated } = useAuth();
 
-  // Loading state
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        Loading...
+      </div>
+    );
   }
 
-  // Not logged in
-  if (!isAuthenticated) {
+  if (!isAuthenticated || !currentUser) {
     return <Navigate to="/login" replace />;
   }
 
-  // Role not allowed
-  if (allowedRoles && !allowedRoles.includes(currentUser?.role)) {
+  if (
+    allowedRoles &&
+    !allowedRoles.includes(currentUser.role)
+  ) {
     return <Navigate to="/unauthorized" replace />;
   }
 
-  // Authorized
   return children;
 }
 
