@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 
 config();
-
+console.log("NEW VERIFY TOKEN FILE LOADED");
 export const verifyToken = (...allowedRoles) => {
   return (req, res, next) => {
     try {
