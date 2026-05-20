@@ -2,7 +2,7 @@ export const verifyToken = (...allowedRoles) => {
   return (req, res, next) => {
     try {
       console.log("Cookies:", req.cookies);
-
+console.log("SECRET_KEY exists:", !!process.env.SECRET_KEY);
       const token = req.cookies?.token;
 
       if (!token) {
