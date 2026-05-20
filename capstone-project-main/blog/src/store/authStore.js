@@ -32,6 +32,7 @@ export const useAuth = create((set) => ({
           loading: false,
           error: null,
         });
+        console.log("CHECK AUTH RESPONSE:", res.data.payload);
       }
     } catch (err) {
       console.log("Login error:", err);
