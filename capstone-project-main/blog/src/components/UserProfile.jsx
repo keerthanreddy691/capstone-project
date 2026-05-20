@@ -22,6 +22,7 @@ function UserProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [articles, setArticles] = useState([]);
+  console.log("CURRENT USER PROFILE:", currentUser);
 
   useEffect(() => {
     const getArticles = async () => {
